@@ -2,8 +2,11 @@ const userModel = require("../../models/userModel");
 const bcrypt = require("bcrypt");
 const Response = require("../../response/response");
 const jwt = require("jsonwebtoken");
+const authValidation = require("../../validation/auth/auth.validation");
 
 register = async (req, res) => {
+	authValidation(req, res);
+
 	let data = req.body;
 
 	try {

@@ -2,10 +2,12 @@ const userModel = require("../../models/userModel");
 const Response = require("../../response/response");
 const jwt = require("jsonwebtoken");
 const { comparePassword } = require("../../helper/hashPassword");
+const authValidation = require("../../validation/auth/auth.validation");
 
 login = async (req, res) => {
+	authValidation(req, res);
+
 	try {
-		let token;
 		let user = await userModel.findOne(req.body.email);
 
 		if (!user) {
@@ -22,7 +24,7 @@ login = async (req, res) => {
 			});
 		}
 
-		token = jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
+		const token = jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
 
 		return Response.success(res, token);
 	} catch (error) {
