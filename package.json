@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./bin/www",
-    "nodemon": "nodemon app"
+    "dev": "nodemon app",
+    "stop": "taskkill -f -im node.exe",
+    "migrate": "npx knex migrate:latest --knexfile knexfile.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -17,6 +19,7 @@
     "joi": "^17.4.2",
     "knex": "^0.95.11",
     "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.13"
   }
