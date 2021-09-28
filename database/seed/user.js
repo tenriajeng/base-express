@@ -10,7 +10,7 @@ exports.seed = function (knex) {
 					username: "admin",
 					displayName: "ilham",
 					email: "ilham@gmail.com",
-					password: "12345678",
+					password: "$2a$12$jqU0F.lXN2x2FZFTExLygO.ku4Pay8k3usPLTS7RF5XgTUE.h7MUC",
 					isActive: true,
 				},
 				{
@@ -18,7 +18,7 @@ exports.seed = function (knex) {
 					username: "user",
 					displayName: "ilhamtenriajeng",
 					email: "ilhamtenriajeng@gmail.com",
-					password: "12345678",
+					password: "$2a$12$jqU0F.lXN2x2FZFTExLygO.ku4Pay8k3usPLTS7RF5XgTUE.h7MUC",
 					isActive: true,
 				},
 			]);

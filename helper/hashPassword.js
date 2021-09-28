@@ -13,12 +13,8 @@ async function hashingPassword(password) {
  * Compare password with hash
  */
 async function comparePassword(password, hash) {
-	return bcrypt.compare(password, hash, function (err, res) {
-		if (err) {
-			reject(err);
-		} else {
-			resolve(res);
-		}
+	return bcrypt.compare(password, hash).then((valid) => {
+		return valid;
 	});
 }
 
