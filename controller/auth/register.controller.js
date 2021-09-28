@@ -1,6 +1,7 @@
 const userModel = require("../../models/userModel");
 const bcrypt = require("bcrypt");
 const Response = require("../../response/response");
+const jwt = require("jsonwebtoken");
 
 register = async (req, res) => {
 	let data = req.body;
@@ -10,9 +11,11 @@ register = async (req, res) => {
 			return hash;
 		});
 
-		await userModel.create(data);
+		let [user] = await userModel.create(data);
 
-		return Response.success(res, data);
+		token = jwt.sign({ userId: user }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
+
+		return Response.success(res, token);
 	} catch (error) {
 		if (error.code == "ER_DUP_ENTRY") {
 			return res.status(403).json({

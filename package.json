@@ -11,7 +11,7 @@
     "migrate:up": "npx knex migrate:up --knexfile knexfile.js",
     "migrate:down": "npx knex migrate:down --knexfile knexfile.js",
     "migrate:rollback": "npx knex migrate:rollback --knexfile knexfile.js",
-    "migrate:rollback --all": "npx knex migrate:rollback --all --knexfile knexfile.js",
+    "migrate:rollback all": "npx knex migrate:rollback --all --knexfile knexfile.js",
     "migrate:list": "npx knex migrate:list --knexfile knexfile.js",
     "seed:run": "npx knex seed:run --knexfile knexfile.js"
   },

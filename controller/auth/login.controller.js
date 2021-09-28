@@ -1,7 +1,7 @@
 const userModel = require("../../models/userModel");
 const Response = require("../../response/response");
 const jwt = require("jsonwebtoken");
-const hashingPassword = require("../../helper/hashPassword");
+const { comparePassword } = require("../../helper/hashPassword");
 
 login = async (req, res) => {
 	try {
@@ -14,7 +14,7 @@ login = async (req, res) => {
 			});
 		}
 
-		const result = await hashingPassword.comparePassword(req.body.password, user.password);
+		const result = await comparePassword(req.body.password, user.password);
 
 		if (!result) {
 			return res.status(401).json({
