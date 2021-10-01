@@ -8,7 +8,7 @@ router.post("/login", loginController);
 router.post("/register", registerController);
 
 router.get("/", function (req, res, next) {
-	res.render("index", { title: "Express" });
+	console.log("Ready");
 });
 
 router.use("/user", User);
