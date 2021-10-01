@@ -2,6 +2,7 @@ const faker = require("faker");
 
 exports.seed = async function (knex, Promise) {
 	let fakeUsers = [];
+
 	for (let index = 1; index <= 2000; index++) {
 		fakeUsers.push(createUserFaker());
 	}
