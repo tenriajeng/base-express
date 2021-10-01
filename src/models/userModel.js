@@ -1,4 +1,5 @@
 const connection = require("../../config/database");
+const { paginate } = require("../helper/pagination");
 
 const findOne = (email) => {
 	return connection
@@ -10,6 +11,12 @@ const findOne = (email) => {
 		.first();
 };
 
+async function findAll(page, limit) {
+	let paging = await paginate(page, limit);
+	console.log(paging);
+	return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").limit(limit).offset(paging.startIndex);
+}
+
 const create = (data) => {
 	return connection
 		.insert({
@@ -20,4 +27,4 @@ const create = (data) => {
 		.from("users");
 };
 
-module.exports = { findOne, create };
+module.exports = { findOne, create, findAll };

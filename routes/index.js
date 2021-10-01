@@ -12,4 +12,5 @@ router.get("/", function (req, res, next) {
 });
 
 router.use("/user", User);
+
 module.exports = router;
