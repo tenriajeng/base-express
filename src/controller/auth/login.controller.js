@@ -2,14 +2,12 @@ const { findOneUser } = require("../../models/userModel");
 const Response = require("../../response/response");
 const jwt = require("jsonwebtoken");
 const { comparePassword } = require("../../helper/hashPassword");
-const authValidation = require("../../validation/auth/auth.validation");
 const { getRoleUser } = require("../../models/roleModel");
 
 login = async (req, res) => {
 	try {
 		let user = await findOneUser(req.body.email);
 
-		console.log(user);
 		if (!user) {
 			return res.status(401).json({
 				error: "User not found!",
@@ -26,7 +24,7 @@ login = async (req, res) => {
 			});
 		}
 
-		const token = jwt.sign({ user }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
+		const token = jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: "24h" });
 
 		return Response.success(res, token);
 	} catch (error) {
