@@ -1,5 +1,4 @@
 const connection = require("../../config/database");
-const { paginate } = require("../helper/pagination");
 
 const findOne = (email) => {
 	return connection
@@ -26,7 +25,10 @@ const create = (data) => {
 			password: data.password,
 			created_at: new Date(),
 		})
-		.from("users");
+		.from("users")
+		.then(function (id) {
+			return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").where("id", id[0]);
+		});
 };
 
 module.exports = { findOne, create, findAll, numberOfUsers };
