@@ -5,7 +5,7 @@ const loginController = require("../src/controller/auth/login.controller");
 const registerController = require("../src/controller/auth/register.controller");
 const authValidation = require("../src/validation/auth/auth.validation");
 
-router.post("/login", loginController);
+router.post("/login", authValidation, loginController);
 router.post("/register", authValidation, registerController);
 
 router.get("/", function (req, res, next) {

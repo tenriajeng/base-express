@@ -5,12 +5,9 @@ const { comparePassword } = require("../../helper/hashPassword");
 const authValidation = require("../../validation/auth/auth.validation");
 const { getRoleUser } = require("../../models/roleModel");
 
-login = async (req, res, next) => {
-	// authValidation(req, res, next);
-
+login = async (req, res) => {
 	try {
 		let user = await findOneUser(req.body.email);
-		user.role = await getRoleUser(user.id);
 
 		console.log(user);
 		if (!user) {
@@ -20,6 +17,7 @@ login = async (req, res, next) => {
 		}
 
 		const result = await comparePassword(req.body.password, user.password);
+		user.role = await getRoleUser(user.id);
 		delete user.password;
 
 		if (!result) {
@@ -30,7 +28,7 @@ login = async (req, res, next) => {
 
 		const token = jwt.sign({ user }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
 
-		return Response.success(res, token);
+		return Response.success(res, "token");
 	} catch (error) {
 		return res.status(400).json({ err: error.message });
 	}
