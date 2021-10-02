@@ -28,7 +28,7 @@ login = async (req, res) => {
 
 		const token = jwt.sign({ user }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
 
-		return Response.success(res, "token");
+		return Response.success(res, token);
 	} catch (error) {
 		return res.status(400).json({ err: error.message });
 	}
