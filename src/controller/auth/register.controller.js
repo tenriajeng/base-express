@@ -1,4 +1,4 @@
-const userModel = require("../../models/userModel");
+const { createUser } = require("../../models/userModel");
 const bcrypt = require("bcrypt");
 const Response = require("../../response/response");
 const jwt = require("jsonwebtoken");
@@ -11,7 +11,7 @@ register = async (req, res) => {
 			return hash;
 		});
 
-		let [user] = await userModel.create(data);
+		let [user] = await createUser(data);
 
 		token = jwt.sign({ userId: user }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
 

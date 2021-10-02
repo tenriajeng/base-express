@@ -1,6 +1,6 @@
 const connection = require("../../config/database");
 
-const findOne = (email) => {
+async function findOneUser(email) {
 	return connection
 		.select("*")
 		.from("users")
@@ -8,17 +8,17 @@ const findOne = (email) => {
 			email: email,
 		})
 		.first();
-};
+}
 
-async function findAll(limit, startIndex) {
+async function getAllUser(limit, startIndex) {
 	return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").limit(limit).offset(startIndex);
 }
 
-async function numberOfUsers() {
+async function getNumberOfUsers() {
 	return connection("users").count("id as count").first();
 }
 
-const create = (data) => {
+async function createUser(data) {
 	return connection
 		.insert({
 			email: data.email,
@@ -29,6 +29,6 @@ const create = (data) => {
 		.then(function (id) {
 			return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").where("id", id[0]);
 		});
-};
+}
 
-module.exports = { findOne, create, findAll, numberOfUsers };
+module.exports = { findOneUser, createUser, getAllUser, getNumberOfUsers };
