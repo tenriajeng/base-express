@@ -3,6 +3,11 @@ const bcrypt = require("bcrypt");
 const Response = require("../../response/response");
 const genarateAccessToken = require("../../helper/genarateAccessToken");
 
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * register user
+ */
 register = async (req, res) => {
 	let data = req.body;
 

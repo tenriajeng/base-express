@@ -6,7 +6,7 @@ userList = async (req, res) => {
 	try {
 		let users = await getNumberOfUsers();
 
-		let paging = await paginate(req.query.page, req.query.limit, users.count);
+		const paging = await paginate(req.query.page, req.query.limit, users.count);
 
 		users = await getAllUser(paging.currentPage.limit, paging.currentPage.startIndex);
 

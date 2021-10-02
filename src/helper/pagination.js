@@ -1,3 +1,9 @@
+/**
+ * @param {BigInteger} page
+ * @param {BigInteger} limit
+ * @param {BigInteger} dataLength
+ * create paginate
+ */
 async function paginate(page = 1, limit = 10, dataLength) {
 	let result = {};
 	page = parseInt(page);

@@ -1,18 +1,31 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = (req, res, next) => {
-	try {
-		const token = req.headers.authorization.split(" ")[1];
-		const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-		const userId = decodedToken.userId;
-		if (req.body.userId && req.body.userId !== userId) {
-			throw "Invalid user ID";
-		} else {
-			next();
-		}
-	} catch {
-		res.status(401).json({
-			error: "Invalid request!",
+/**
+ * @author ILHAM TENRIAJENG
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * middleware for check authentication
+ */
+async function authMiddleware(req, res, next) {
+	const authHeader = req.headers.authorization;
+	const token = authHeader && authHeader.split(" ")[1];
+
+	if (token == null || token == " ") {
+		return res.status(401).json({
+			error: 401,
+			message: "Please Provide Token",
 		});
 	}
-};
+
+	return jwt.verify(token, process.env.TOKEN_SECRET, (err, _) => {
+		if (err) {
+			return res.status(403).json({
+				error: err.message,
+			});
+		}
+		return next();
+	});
+}
+
+module.exports = authMiddleware;

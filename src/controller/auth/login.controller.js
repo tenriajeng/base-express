@@ -4,7 +4,12 @@ const { comparePassword } = require("../../helper/hashPassword");
 const { getRoleUser } = require("../../models/roleModel");
 const genarateAccessToken = require("../../helper/genarateAccessToken");
 
-login = async (req, res) => {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * login user
+ */
+async function login(req, res) {
 	try {
 		let user = await findOneUser(req.body.email);
 
@@ -30,6 +35,6 @@ login = async (req, res) => {
 	} catch (error) {
 		return res.status(400).json({ err: error.message });
 	}
-};
+}
 
 module.exports = login;

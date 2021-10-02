@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+/**
+ * @param {string} password
+ * hashing password
+ */
 async function hashingPassword(password) {
 	return bcrypt.hash(password, saltRounds, (err, hash) => {
 		return hash;
