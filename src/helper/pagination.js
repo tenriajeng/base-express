@@ -1,15 +1,32 @@
-async function paginate(page, limit) {
+async function paginate(page = 1, limit = 10, dataLength) {
+	let result = {};
+	page = parseInt(page);
+	limit = parseInt(limit);
 	const startIndex = (page - 1) * limit;
 	const endIndex = page * limit;
 
-	const data = {
-		page,
-		limit,
+	result.currentPage = {
+		page: page,
+		limit: limit,
 		startIndex,
 		endIndex,
 	};
 
-	return data;
+	if (endIndex < dataLength) {
+		result.nextPage = {
+			page: page + 1,
+			limit: limit,
+		};
+	}
+
+	if (startIndex > 0) {
+		result.previousPage = {
+			page: page - 1,
+			limit: limit,
+		};
+	}
+
+	return result;
 }
 
 module.exports = { paginate };

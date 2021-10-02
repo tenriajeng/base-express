@@ -11,10 +11,12 @@ const findOne = (email) => {
 		.first();
 };
 
-async function findAll(page, limit) {
-	let paging = await paginate(page, limit);
-	console.log(paging);
-	return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").limit(limit).offset(paging.startIndex);
+async function findAll(limit, startIndex) {
+	return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").limit(limit).offset(startIndex);
+}
+
+async function numberOfUsers() {
+	return connection("users").count("id as count").first();
 }
 
 const create = (data) => {
@@ -27,4 +29,4 @@ const create = (data) => {
 		.from("users");
 };
 
-module.exports = { findOne, create, findAll };
+module.exports = { findOne, create, findAll, numberOfUsers };
