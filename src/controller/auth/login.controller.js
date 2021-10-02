@@ -1,8 +1,8 @@
 const { findOneUser } = require("../../models/userModel");
 const Response = require("../../response/response");
-const jwt = require("jsonwebtoken");
 const { comparePassword } = require("../../helper/hashPassword");
 const { getRoleUser } = require("../../models/roleModel");
+const genarateAccessToken = require("../../helper/genarateAccessToken");
 
 login = async (req, res) => {
 	try {
@@ -24,7 +24,7 @@ login = async (req, res) => {
 			});
 		}
 
-		const token = jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: "24h" });
+		const token = await genarateAccessToken(user);
 
 		return Response.success(res, token);
 	} catch (error) {

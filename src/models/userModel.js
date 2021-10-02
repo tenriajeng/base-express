@@ -27,7 +27,7 @@ async function createUser(data) {
 		})
 		.from("users")
 		.then(function (id) {
-			return connection.select("id", "username", "displayName", "email", "avatar", "isActive").from("users").where("id", id[0]);
+			return connection.select("id", "username", "displayName", "email", "avatar", "isActive", "created_at").from("users").where("id", id[0]);
 		});
 }
 

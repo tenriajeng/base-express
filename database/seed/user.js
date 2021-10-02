@@ -1,12 +1,6 @@
 const faker = require("faker");
 
-exports.seed = async function (knex, Promise) {
-	let fakeUsers = [];
-
-	for (let index = 1; index <= 2000; index++) {
-		fakeUsers.push(createUserFaker());
-	}
-
+exports.seed = async function (knex) {
 	await knex("users").del();
 
 	await knex("users").insert([
@@ -28,10 +22,13 @@ exports.seed = async function (knex, Promise) {
 		},
 	]);
 
-	await knex("users").insert(fakeUsers);
+	for (let index = 3; index <= 2003; index++) {
+		await knex("users").insert(createUserFaker(index));
+	}
 };
 
-const createUserFaker = () => ({
+const createUserFaker = (id) => ({
+	id: id,
 	username: faker.name.findName(),
 	email: faker.internet.email(),
 	password: "$2a$12$jqU0F.lXN2x2FZFTExLygO.ku4Pay8k3usPLTS7RF5XgTUE.h7MUC",

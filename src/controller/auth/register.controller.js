@@ -1,7 +1,7 @@
 const { createUser } = require("../../models/userModel");
 const bcrypt = require("bcrypt");
 const Response = require("../../response/response");
-const jwt = require("jsonwebtoken");
+const genarateAccessToken = require("../../helper/genarateAccessToken");
 
 register = async (req, res) => {
 	let data = req.body;
@@ -13,7 +13,7 @@ register = async (req, res) => {
 
 		let [user] = await createUser(data);
 
-		token = jwt.sign({ userId: user }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" });
+		const token = await genarateAccessToken(user);
 
 		return Response.success(res, token);
 	} catch (error) {
