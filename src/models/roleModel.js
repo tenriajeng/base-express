@@ -1,12 +1,7 @@
 const connection = require("../../config/database");
 
 async function getRoleUser(userId) {
-	return connection
-		.join("role_users", "role_users.user_id", "=", "users.id")
-		.rightJoin("roles", "roles.id", "=", "role_users.role_id")
-		.select("roles.id", "roles.role_name")
-		.where("users.id", userId)
-		.from("users");
+	return connection.join("roles", "roles.id", "=", "role_users.role_id").select("roles.id", "roles.role_name").where("role_users.user_id", userId).from("role_users");
 }
 
 module.exports = { getRoleUser };
