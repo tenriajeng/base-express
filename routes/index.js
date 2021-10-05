@@ -10,6 +10,7 @@ router.post("/register", authValidation, registerController);
 
 router.get("/", function (req, res, next) {
 	console.log("Ready");
+	return "Ready";
 });
 
 router.use("/user", User);
