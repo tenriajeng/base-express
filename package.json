@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node app.js", 
     "dev": "nodemon app",
     "stop": "taskkill -f -im node.exe",
     "migrate": "npx knex migrate:latest --knexfile knexfile.js",
