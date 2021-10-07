@@ -4,6 +4,12 @@ this project is used to make it easier to start making express js projects
 ## Demo
 https://base-express-js.herokuapp.com
 
+## Feature
+-   Auth using jwt
+-   Paginate
+-   User role
+-   Standard response
+
 ### Hi there, I'm Muh. Ilham Tenriajeng - aka [Tenriajeng] 👋
 
 ## I'm a Developer
