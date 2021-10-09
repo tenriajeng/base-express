@@ -10,6 +10,15 @@ https://base-express-js.herokuapp.com
 -   User role
 -   Standard response
 
+
+## Package
+-   bcrypt
+-   dotenv
+-   faker
+-   joi
+-   mysql2
+-   nodemon
+
 ### Hi there, I'm Muh. Ilham Tenriajeng - aka [Tenriajeng] 👋
 
 ## I'm a Developer
